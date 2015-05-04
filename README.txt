@@ -27,8 +27,8 @@ How to do things:
 12) Delete a business: Send a delete using endpoint #6 where the ID is the ID of the business to be deleted. This will cascade through the many-to-many.
 13) Remove a business from a subcategory: Send a delete using endpoint #8 with the IDs of the subcategory and the business. 
 14) Remove a subcategory from a category: Send a delete using endpoint #7 with the IDs of the category and subcategory. 
-15) Update/edit a category: Send a post to endpoint #2, where the ID is the ID of the category and the json is like {"name": "New updated name"}
-16) Update/edit a subcategory: Send a post to endpoint #4, where the ID is the ID of the subcategory and the json is like {"name": "New updated subcategory name"}
+15) Update/edit a category: Send a post to endpoint #1, where the json is like {"id":1, name": "New updated name"}
+16) Update/edit a subcategory: Send a post to endpoint #3, where  the json is like {"id":2, name": "New updated subcategory name"}
 17) Update/edit a business #############################################
 
 
