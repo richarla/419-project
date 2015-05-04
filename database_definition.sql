@@ -341,6 +341,3 @@ values
 ("Corvallis Bicycle Collective","541-224-6885", "33900 SE Roche Ln/Hwy 34", "", "OR", "", "", ""),
 ("CorvallisFurniture.com","541-231-8103", "720 NE Granger Ave, Bldg J", "", "OR", "", "", "");
 
-INSERT INTO subcategory_businesses(subcatId, businessId)
-values
-((SELECT id FROM subcategory_table WHERE name = "Arts and crafts"), (SELECT id from businesses_table WHERE name = "Book Binding"));
