@@ -37,7 +37,7 @@ class Category(webapp2.RequestHandler):
 		if (self.request.headers['content-type'] != 'application/json'):
 			self.abort(415, explanation="Requires json.")
 		category = json.loads(self.request.body)
-		if (category['id']):
+		if ('id' in category):
 			db.cursor.execute('UPDATE category_table SET name = %s WHERE id = %s', (category['name'], category['id']))
 			db.db.commit()
 			currentId = category['id']

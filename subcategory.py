@@ -37,7 +37,7 @@ class Subcategory(webapp2.RequestHandler):
 		if (self.request.headers['content-type'] != 'application/json'):
 			self.abort(415, explanation="Requires json.")
 		subcategory = json.loads(self.request.body)
-		if (subcategory['id']):
+		if ('id' in subcategory):
 			db.cursor.execute('UPDATE subcategory_table SET name = %s WHERE id = %s', (subcategory['name'], subcategory['id']))
 			db.db.commit()
 			currentId = subcategory['id']

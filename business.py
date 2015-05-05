@@ -29,8 +29,39 @@ class Business(webapp2.RequestHandler):
 		if (self.request.headers['content-type'] != 'application/json'):
 			self.abort(415, explanation="Requires json.")
 		business = json.loads(self.request.body)
-		if (business['id']):
-			db.cursor.execute('UPDATE business_table SET name = %s WHERE id = %s', (business['name'], business['id']))
+		if ('id' in business):
+			queryString = "UPDATE businesses_table SET "
+			argList= []
+			if ('name' in business):
+				queryString = queryString + "name = %s,"
+				argList.append(business['name'])
+			if ('phoneNumber' in business):
+				queryString = queryString + "phoneNumber = %s,"
+				argList.append(business['phoneNumber'])
+			if ('streetAddress' in business):
+				queryString = queryString + "streetAddress = %s,"
+				argList.append(business['streetAddress'])
+			if ('city' in business):
+				queryString = queryString + "city = %s,"
+				argList.append(business['city'])
+			if ('state' in business):
+				queryString = queryString + "state = %s,"
+				argList.append(business['state'])
+			if ('zipCode' in business):
+				queryString = queryString + "zipCode = %s,"
+				argList.append(business['zipCode'])
+			if ('hours' in business):
+				queryString = queryString + "hours = %s,"
+				argList.append(business['hours'])
+			if ('webpage' in business):
+				queryString = queryString + "webpage = %s,"
+				argList.append(business['webpage'])
+			if (len(argList) == 0):
+				self.abort(400, explanation="Nothing passed in to update.")
+			queryString = queryString[:-1]
+			queryString = queryString + " WHERE id = %s"
+			argList.append(business['id'])
+			db.cursor.execute(queryString, tuple(argList))
 			db.db.commit()
 			currentId = business['id']
 		else:
@@ -39,7 +70,7 @@ class Business(webapp2.RequestHandler):
 			db.db.commit()
 			currentId = db.cursor.lastrowid
 			self.response.headers["location"] = "/business/" + str(currentId)
-		businessResponse = {"id":currentId, "name":business["name"]}
+		businessResponse = {"id":currentId}
 		self.response.write(json.dumps(businessResponse) + "\n")
 
 
