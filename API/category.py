@@ -6,6 +6,7 @@ import database_object
 
 class Category(webapp2.RequestHandler):
 	def get(self, **kwargs):
+		self.response.headers.add_header("Access-Control-Allow-Origin", "*")
 		self.response.headers['content-type'] = 'application/json'
 		db = database_object.DatabaseObject()
 		if 'id' in kwargs:
@@ -32,6 +33,7 @@ class Category(webapp2.RequestHandler):
 			self.response.write(json.dumps(categories)+"\n")
 
 	def post(self, **kwargs):
+		self.response.headers.add_header("Access-Control-Allow-Origin", "*")
 		self.response.headers['content-type'] = 'application/json'
 		db = database_object.DatabaseObject()
 		if (self.request.headers['content-type'] != 'application/json'):
@@ -50,6 +52,7 @@ class Category(webapp2.RequestHandler):
 		self.response.write(json.dumps(catResponse) + "\n")
 
 	def delete(self, **kwargs):
+		self.response.headers.add_header("Access-Control-Allow-Origin", "*")
 		self.response.headers['content-type'] = 'application/json'
 		db = database_object.DatabaseObject()
 		if 'id' in kwargs:

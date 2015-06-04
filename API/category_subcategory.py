@@ -6,6 +6,7 @@ import database_object
 
 class CategorySubcategory(webapp2.RequestHandler):
 	def put(self, **kwargs):
+		self.response.headers.add_header("Access-Control-Allow-Origin", "*")
 		self.response.headers['content-type'] = 'application/json'
 		db = database_object.DatabaseObject()
 		db.cursor.execute('INSERT INTO category_subcategory(catId, subcatId) values (%s, %s)', (kwargs['catId'], kwargs['subcatId'],))
@@ -13,6 +14,7 @@ class CategorySubcategory(webapp2.RequestHandler):
 
 
 	def delete(self, **kwargs):
+		self.response.headers.add_header("Access-Control-Allow-Origin", "*")
 		self.response.headers['content-type'] = 'application/json'
 		db = database_object.DatabaseObject()
 		if 'id' in kwargs:
